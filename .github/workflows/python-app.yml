@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  run_python_script:
 
     runs-on: ubuntu-latest
 
@@ -27,6 +27,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install flake8 pytest
+        python -m pip install requests pandas
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
