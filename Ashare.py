@@ -1,6 +1,7 @@
-# -*- coding:utf-8 -*-    --------------Ashare 股票行情数据双核心版( https://github.com/mpquant/Ashare )
-import json, requests, datetime;
-import pandas as pd  #
+import datetime
+import json
+import requests
+import pandas as pd
 
 
 # 腾讯日线
