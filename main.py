@@ -54,13 +54,19 @@ if __name__ == '__main__':
     lowPoint = dfOneDay['low'].mean()
     highPoint = dfOneDay['high'].mean()
 
+    body = f"当前高水位是：{highLine}\n" \
+           f"当前收盘价是：{dfOneDay['close'].mean()}\n" \
+           f"当前低水位是：{lowLine}"
+
+    print(body)
+
     if lowPoint < lowLine:
-        send_email(f"大盘昨日的最低点是：{lowPoint}\n"
-                   f"已低于计算出的水位：{lowLine}\n"
+        send_email(f"当前最低点是：{lowPoint}\n"
+                   f"当前低水位是：{lowLine}\n"
                    f"该买了")
     elif highPoint > highLine:
-        send_email(f"大盘昨日的最高点是：{highPoint}\n"
-                   f"已高于计算出的水位：{highLine}\n"
+        send_email(f"当前最高点是：{highPoint}\n"
+                   f"当前高水位是：{highLine}\n"
                    f"该卖了")
     else:
         send_email('')
