@@ -33,6 +33,9 @@ def send_email(body):
         if body != '':
             # 发送邮件
             server.sendmail(sender, recipient, msg.as_string())
+            print("邮件已发送")
+        else:
+            print("无需发送邮件")
     else:
         print("SMTP 登录失败")
 
