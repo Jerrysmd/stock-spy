@@ -92,5 +92,3 @@ if __name__ == '__main__':
 
     df = get_price('000001.XSHG', frequency='15m', count=10)  # 支持'1m','5m','15m','30m','60m'
     print('上证指数分钟线\n', df)
-
-# Ashare 股票行情数据( https://github.com/mpquant/Ashare )
