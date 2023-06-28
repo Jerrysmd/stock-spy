@@ -47,7 +47,7 @@ if __name__ == '__main__':
     dfTenYears = get_price('sh000001', frequency='1d', count=2426)
 
     lowLine = dfTenYears['close'].mean()
-    highLine = lowLine + 470
+    highLine = lowLine + 450
 
     dfOneDay = get_price('sh000001', frequency='1d', count=1)
 
