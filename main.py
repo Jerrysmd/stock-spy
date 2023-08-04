@@ -1,14 +1,16 @@
+import os
+import smtplib
+import time
 from email.header import Header
 from email.mime.text import MIMEText
 
 from Ashare import *
-import smtplib
-import os
 
 
 def send_email(body):
     smtp_mail = os.environ.get('SMTP_MAIL')
     smtp_token = os.environ.get('SMTP_TOKEN')
+    LAST_EMAIL_TIMESTAMP = os.environ.get('LAST_EMAIL_TIMESTAMP', "0")
 
     # 设置发件人和收件人的邮箱地址
     sender = smtp_mail
@@ -30,10 +32,11 @@ def send_email(body):
 
     if status == 235:
         print("SMTP 登录成功")
-        if body != '':
+        if body != '' and (time.time() - float(LAST_EMAIL_TIMESTAMP) > 3600 * 24 * 30):
             # 发送邮件
             server.sendmail(sender, recipient, msg.as_string())
             print("邮件已发送")
+            os.environ['LAST_EMAIL_TIMESTAMP'] = str(time.time())
         else:
             print("无需发送邮件")
     else:
@@ -44,29 +47,30 @@ def send_email(body):
 
 
 if __name__ == '__main__':
-    dfTenYears = get_price('sh000001', frequency='1d', count=2426)
+    kLine_2500day = get_price('sh000001', frequency='1d', count=2500)
+    kLine_200day = get_price('sh000001', frequency='1d', count=170)
+    kLine_day = get_price('sh000001', frequency='1d', count=1)
 
-    lowLine = dfTenYears['close'].mean()
-    highLine = lowLine + 450
+    low_water = kLine_2500day['close'].mean()
+    high_water = low_water + 450
+    day200_water = kLine_200day['close'].mean()
 
-    dfOneDay = get_price('sh000001', frequency='1d', count=1)
+    low_of_day = kLine_day['low'].mean()
+    high_of_day = kLine_day['high'].mean()
 
-    lowPoint = dfOneDay['low'].mean()
-    highPoint = dfOneDay['high'].mean()
+    msg_body = f"当前高水位是：{high_water}\n" \
+               f"当前收盘价是：{kLine_day['close'].mean()}\n" \
+               f"当前低水位是：{low_water}"
 
-    body = f"当前高水位是：{highLine}\n" \
-           f"当前收盘价是：{dfOneDay['close'].mean()}\n" \
-           f"当前低水位是：{lowLine}"
+    print(msg_body)
 
-    print(body)
-
-    if lowPoint < lowLine:
-        send_email(f"当前最低点是：{lowPoint}\n"
-                   f"当前低水位是：{lowLine}\n"
-                   f"该买了")
-    elif highPoint > highLine:
-        send_email(f"当前最高点是：{highPoint}\n"
-                   f"当前高水位是：{highLine}\n"
-                   f"该卖了")
+    if low_of_day < low_water:
+        send_email(f"当日最低点是：{low_of_day}\n"
+                   f"当前低水位是：{low_water}\n"
+                   f"该考虑买了")
+    elif high_of_day > high_water or day200_water > high_water:
+        send_email(f"当日最高点是：{high_of_day}\n"
+                   f"当前高水位是：{high_water}\n"
+                   f"该考虑卖了")
     else:
         send_email('')

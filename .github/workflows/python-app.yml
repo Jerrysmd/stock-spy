@@ -32,6 +32,10 @@ jobs:
       run: |
         echo "SMTP_MAIL=${{ secrets.SMTP_MAIL }}" >> $GITHUB_ENV
         echo "SMTP_TOKEN=${{ secrets.SMTP_TOKEN }}" >> $GITHUB_ENV
+        echo "LAST_EMAIL_TIMESTAMP=${{ secrets.LAST_EMAIL_TIMESTAMP }}" >> $GITHUB_ENV
     - name: Run Python script
       run: |
         python main.py
+    - name: Update secret
+      run: |
+        gh secret set LAST_EMAIL_TIMESTAMP -- ${LAST_EMAIL_TIMESTAMP}
