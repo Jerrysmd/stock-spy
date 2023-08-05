@@ -39,4 +39,4 @@ jobs:
         python main.py
     - name: Update secret
       run: |
-        gh secret set LAST_EMAIL_TIMESTAMP -- "$LAST_EMAIL_TIMESTAMP" -t ${{ secrets.GITHUB_TOKEN }}
+        gh secret set LAST_EMAIL_TIMESTAMP "$LAST_EMAIL_TIMESTAMP"
