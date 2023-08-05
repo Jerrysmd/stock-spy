@@ -34,6 +34,7 @@ jobs:
         echo "SMTP_MAIL=${{ secrets.SMTP_MAIL }}" >> $GITHUB_ENV
         echo "SMTP_TOKEN=${{ secrets.SMTP_TOKEN }}" >> $GITHUB_ENV
         echo "LAST_EMAIL_TIMESTAMP=${{ secrets.LAST_EMAIL_TIMESTAMP }}" >> $GITHUB_ENV
+        echo "$LAST_EMAIL_TIMESTAMP"
     - name: Run Python script
       run: |
         python main.py
