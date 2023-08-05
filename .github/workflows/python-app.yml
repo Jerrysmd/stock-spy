@@ -4,6 +4,7 @@
 name: Python application
 
 on:
+  push:
   schedule:
     - cron: '0 8 * * *'
   workflow_dispatch:
@@ -38,4 +39,4 @@ jobs:
         python main.py
     - name: Update secret
       run: |
-        gh secret set LAST_EMAIL_TIMESTAMP -- ${LAST_EMAIL_TIMESTAMP}
+        gh secret set LAST_EMAIL_TIMESTAMP -- "$LAST_EMAIL_TIMESTAMP" -t ${{ secrets.GITHUB_TOKEN }}
