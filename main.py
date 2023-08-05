@@ -12,6 +12,8 @@ def send_email(body):
     smtp_token = os.environ.get('SMTP_TOKEN')
     LAST_EMAIL_TIMESTAMP = os.environ.get('LAST_EMAIL_TIMESTAMP', "0")
 
+    print(f"LAST_EMAIL_TIMESTAMP: {LAST_EMAIL_TIMESTAMP}")
+
     # 设置发件人和收件人的邮箱地址
     sender = smtp_mail
     recipient = smtp_mail
