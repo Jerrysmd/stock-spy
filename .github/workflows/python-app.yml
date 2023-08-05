@@ -28,7 +28,7 @@ jobs:
         python -m pip install --upgrade pip
         pip config set global.progress_bar off
         pip config set global.use_feature fast-deps
-        pip list | grep -E "requests|pandas"
+        python -m pip install requests pandas
     - name: Set Environment Variables
       run: |
         echo "SMTP_MAIL=${{ secrets.SMTP_MAIL }}" >> $GITHUB_ENV
