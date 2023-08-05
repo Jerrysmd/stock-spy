@@ -38,8 +38,9 @@ jobs:
       run: |
         python main.py
     - name: Update secret
-      uses: action-pack/set-secret@v1
+      uses: hmanzur/actions-set-secret@v2.0.0
       with:
         name: 'LAST_EMAIL_TIMESTAMP'
         value: '$LAST_EMAIL_TIMESTAMP'
+        repository: hmanzur/actions-set-secret
         token: ${{ secrets.REPO_ACCESS_TOKEN }}
