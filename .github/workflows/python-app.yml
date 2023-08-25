@@ -35,11 +35,13 @@ jobs:
         echo "SMTP_TOKEN=${{ secrets.SMTP_TOKEN }}" >> $GITHUB_ENV
         echo "LAST_EMAIL_TIMESTAMP=${{ secrets.LAST_EMAIL_TIMESTAMP }}" >> $GITHUB_ENV
     - name: Run Python script
+      id: run-python
       run: |
         python main.py
+        echo "::set-output name=time::${{ env.LAST_EMAIL_TIMESTAMP }}"
     - name: Update secret
       uses: action-pack/set-secret@v1
       with:
         name: 'LAST_EMAIL_TIMESTAMP'
-        value: ${{ env.LAST_EMAIL_TIMESTAMP }}
+        value: ${{ steps.run-python.outputs.time }}
         token: ${{ secrets.REPO_ACCESS_TOKEN }}
