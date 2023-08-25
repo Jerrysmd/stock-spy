@@ -38,7 +38,7 @@ jobs:
       id: run-python
       run: |
         python main.py
-        echo "::set-output name=time::${{ env.LAST_EMAIL_TIMESTAMP }}"
+        echo "time=${{ env.LAST_EMAIL_TIMESTAMP }}" >> $GITHUB_OUTPUT
     - name: Update secret
       uses: action-pack/set-secret@v1
       with:
