@@ -41,5 +41,5 @@ jobs:
       uses: action-pack/set-secret@v1
       with:
         name: 'LAST_EMAIL_TIMESTAMP'
-        value: ${{ secrets.LAST_EMAIL_TIMESTAMP }}
+        value: ${{ env.LAST_EMAIL_TIMESTAMP }}
         token: ${{ secrets.REPO_ACCESS_TOKEN }}
