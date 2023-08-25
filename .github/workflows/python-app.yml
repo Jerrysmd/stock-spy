@@ -45,8 +45,3 @@ jobs:
         github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
         secret_name: LAST_EMAIL_TIMESTAMP
         secret_value: ${{ steps.run-python.outputs.time }}
-    - name: test
-      run: |
-        echo "test output:"${{ steps.run-python.outputs.time }}
-        echo "test output2:"${{ env.LAST_EMAIL_TIMESTAMP }}
-        echo "test output3:"${{ secrets.LAST_EMAIL_TIMESTAMP }}
