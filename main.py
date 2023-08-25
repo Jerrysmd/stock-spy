@@ -66,11 +66,9 @@ if __name__ == '__main__':
 
     if low_of_day < low_water:
         send_email(f"当日最低点是：{low_of_day}\n"
-                   f"当前低水位是：{low_water}\n"
-                   f"该考虑买了")
+                   f"当前低水位是：{low_water}")
     elif high_of_day > high_water or day200_water > high_water:
         send_email(f"当日最高点是：{high_of_day}\n"
-                   f"当前高水位是：{high_water}\n"
-                   f"该考虑卖了")
+                   f"当前高水位是：{high_water}")
     else:
         send_email('')
