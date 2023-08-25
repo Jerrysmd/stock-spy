@@ -37,6 +37,7 @@ def send_email(body):
             server.sendmail(sender, recipient, msg.as_string())
             print("邮件已发送")
             os.environ['LAST_EMAIL_TIMESTAMP'] = str(time.time())
+            os.environ.setdefault('LAST_EMAIL_TIMESTAMP', str(time.time()))
         else:
             print("无需发送邮件")
     else:
