@@ -40,8 +40,8 @@ jobs:
         python main.py
         echo "time=${{ env.LAST_EMAIL_TIMESTAMP }}" >> $GITHUB_OUTPUT
     - name: Update secret
-      uses: action-pack/set-secret@v1
+      uses: Skandalik/save-secret@v1.0.0
       with:
-        name: 'LAST_EMAIL_TIMESTAMP'
-        value: ${{ steps.run-python.outputs.time }}
-        token: ${{ secrets.REPO_ACCESS_TOKEN }}
+        github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
+        secret_name: LAST_EMAIL_TIMESTAMP
+        secret_value: ${{ steps.run-python.outputs.time }}
